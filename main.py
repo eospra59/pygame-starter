@@ -1,5 +1,6 @@
 import pygame # import library
 import random
+import time
 pygame.init()
 
 # Create the window
@@ -8,13 +9,13 @@ win = pygame.display.set_mode((800, 600))
 font = pygame.font.SysFont("arial", 72)
 font2 = pygame.font.SysFont("arial", 50)
 font3 = pygame.font.SysFont("arial", 28)
-img2 = pygame.image.load('forest-assets/silver_coin.gif').convert()
-img3 = pygame.image.load('forest-assets/copper_coin.gif').convert()
-img4 = pygame.image.load('forest-assets/sample3b.png').convert()
-spritesheet = pygame.image.load('gfx/character.png').convert()
-hearts = pygame.image.load('gfx/objects.png')
-text = pygame.image.load('gfx/font.png')
-doors = pygame.image.load('gfx/Overworld.png')
+img2 = pygame.image.load('assets/forest-assets/silver_coin.gif').convert()
+img3 = pygame.image.load('assets/forest-assets/copper_coin.gif').convert()
+img4 = pygame.image.load('assets/forest-assets/sample3b.png').convert()
+spritesheet = pygame.image.load('assets/gfx/character.png').convert()
+hearts = pygame.image.load('assets/gfx/objects.png')
+text = pygame.image.load('assets/gfx/font.png')
+doors = pygame.image.load('assets/gfx/Overworld.png')
 # Create the first image
 smol_img = pygame.Surface([16, 30]).convert()
 smol_img.blit(spritesheet, (0, 0), (0, 0, 16, 30))
@@ -28,10 +29,10 @@ text_img.blit(text, (0, 0), (0, 50, 240, 70))
 text = font.render("Welcome to Raymere", True, (130, 143, 133))
 text2 = font2.render("Your adventure shall begin.", True, (130, 143, 133))
 text3 = font3.render("Begin Game", True, (84, 92, 86))
-#x = 0
-#y = 0
-#a = 0
-#b = 0
+x = 360
+y = 570
+a = x - 1
+b = x + 1
 #c = 0
 run = True
 while run:
@@ -41,6 +42,8 @@ while run:
 
 # Game code starts here ---------------------
   #win.fill((0, 0, 0))
+  global a
+  global b
   win.blit(img4, (0, 0))
   win.blit(img4, (200, 0))
   win.blit(img4, (400, 0))
@@ -55,13 +58,32 @@ while run:
   win.blit(img4, (600, 400))
   win.blit(img2, (380, 520))
   win.blit(img3, (410, 520))
-  win.blit(smol_img, (360, 570))
-  win.blit(heart_img, (380, 500))
   win.blit(door_img, (380, 550))
   win.blit(text_img, (280, 250))
   win.blit(text, (50, 100))
   win.blit(text2, (100, 180))
   win.blit(text3, (325, 265))
+  a = x - 1
+  b = x + 1
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_LEFT]:
+    x -= .3
+  if keys[pygame.K_RIGHT]:
+    x += .3
+  if keys[pygame.K_UP]:
+    y -= .3
+  if keys[pygame.K_DOWN]:
+    y += .3    
+  if keys[pygame.K_SPACE]:
+    spritesheet = pygame.image.load('assets/gfx/character.png').convert()
+    smol_img = pygame.Surface([16, 30]).convert()
+    smol_img.blit(spritesheet, (0, 0), (7, 130, 16, 30))
+  if keys[pygame.K_BACKSPACE]:
+    spritesheet = pygame.image.load('assets/gfx/character.png').convert()
+    smol_img = pygame.Surface([16, 30]).convert()
+    smol_img.blit(spritesheet, (0, 0), (0, 0, 16, 30))
+  win.blit(heart_img, (a, b))
+  win.blit(smol_img, (x, y))
   #x = random.randint(0, 1000)
   #y = random.randint(0, 1000)
   #a = random.randint(0, 255)
