@@ -14,6 +14,7 @@ img3 = pygame.image.load('assets/forest-assets/copper_coin.gif').convert()
 img4 = pygame.image.load('assets/forest-assets/sample3b.png').convert()
 spritesheet = pygame.image.load('assets/gfx/character.png').convert()
 hearts = pygame.image.load('assets/gfx/objects.png')
+buddy = pygame.image.load('assets/hero/sliced/jump-1.png')
 text = pygame.image.load('assets/gfx/font.png')
 doors = pygame.image.load('assets/gfx/Overworld.png')
 # Create the first image
@@ -31,8 +32,9 @@ text2 = font2.render("Your adventure shall begin.", True, (130, 143, 133))
 text3 = font3.render("Begin Game", True, (84, 92, 86))
 x = 360
 y = 570
-a = x - 1
-b = x + 1
+hp = 100
+#a = x - 1
+#b = x + 1
 #c = 0
 run = True
 while run:
@@ -42,29 +44,25 @@ while run:
 
 # Game code starts here ---------------------
   #win.fill((0, 0, 0))
-  global a
-  global b
-  win.blit(img4, (0, 0))
-  win.blit(img4, (200, 0))
-  win.blit(img4, (400, 0))
-  win.blit(img4, (600, 0))
-  win.blit(img4, (0, 200))
-  win.blit(img4, (200, 200))
-  win.blit(img4, (400, 200))
-  win.blit(img4, (600, 200))
-  win.blit(img4, (0, 400))
-  win.blit(img4, (200, 400))
-  win.blit(img4, (400, 400))
-  win.blit(img4, (600, 400))
-  win.blit(img2, (380, 520))
-  win.blit(img3, (410, 520))
-  win.blit(door_img, (380, 550))
-  win.blit(text_img, (280, 250))
-  win.blit(text, (50, 100))
-  win.blit(text2, (100, 180))
-  win.blit(text3, (325, 265))
-  a = x - 1
-  b = x + 1
+  #win.blit(img4, (0, 0))
+  #win.blit(img4, (200, 0))
+  #win.blit(img4, (400, 0))
+  #win.blit(img4, (600, 0))
+  #win.blit(img4, (0, 200))
+  #win.blit(img4, (200, 200))
+  #win.blit(img4, (400, 200))
+  #win.blit(img4, (600, 200))
+  #win.blit(img4, (0, 400))
+  #win.blit(img4, (200, 400))
+  #win.blit(img4, (400, 400))
+  #win.blit(img4, (600, 400))
+  #win.blit(img2, (380, 520))
+  #win.blit(img3, (410, 520))
+  #win.blit(door_img, (380, 550))
+  #win.blit(text_img, (280, 250))
+  #win.blit(text, (50, 100))
+  #win.blit(text2, (100, 180))
+  #win.blit(text3, (325, 265))
   keys = pygame.key.get_pressed()
   if keys[pygame.K_LEFT]:
     x -= .3
@@ -82,8 +80,31 @@ while run:
     spritesheet = pygame.image.load('assets/gfx/character.png').convert()
     smol_img = pygame.Surface([16, 30]).convert()
     smol_img.blit(spritesheet, (0, 0), (0, 0, 16, 30))
-  win.blit(heart_img, (a, b))
+  win.blit(buddy, (y, x))
   win.blit(smol_img, (x, y))
+  if x < 0:
+    x = 400
+    y = 300
+    hp -= 1
+    print(hp)
+  if y < 0:
+    x = 20
+    y = 500
+    hp -= 1
+    print(hp)
+  if x > 800:
+    x = 200
+    y = 10
+    hp -= 1
+    print(hp)
+  if y > 600:
+    x = 300
+    y = 400
+    hp -= 1
+    print(hp)
+  if y + 5 == x or y - 5 == x:
+    hp -= 1
+    print(hp)
   #x = random.randint(0, 1000)
   #y = random.randint(0, 1000)
   #a = random.randint(0, 255)
