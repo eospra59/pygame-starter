@@ -102,9 +102,7 @@ while run:
     y = 400
     hp -= 1
     print(hp)
-  if y + 5 == x or y - 5 == x:
-    hp -= 1
-    print(hp)
+
   #x = random.randint(0, 1000)
   #y = random.randint(0, 1000)
   #a = random.randint(0, 255)
